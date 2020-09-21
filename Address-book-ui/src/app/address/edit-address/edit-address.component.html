@@ -1,0 +1,94 @@
+<div class="row justify-content-center">
+  <div class="col-11 col-sm-8 col-md-6 shadow p-3 mt-0" *ngIf="!isLoading">
+    <h3 class="text-center">
+      {{ editMode ? "Edit Address" : "Add Addresss" }}
+    </h3>
+    <form [formGroup]="myForm" (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label>Name</label>
+        <input
+          type="text"
+          [class.is-invalid]="isValidControl('name')"
+          formControlName="name"
+          class="form-control"
+        />
+        <div class="invalid-feedback">
+          Please enter a username.
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Email</label>
+        <input
+          type="email"
+          formControlName="email"
+          [class.is-invalid]="isValidControl('email') || email != null"
+          class="form-control"
+        />
+        <div class="invalid-feedback">
+          {{ email ? email : "Please enter a valid email." }}
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Mobile Numbers</label>
+        <div class="row">
+          <div class="col">
+            <input
+              type="text"
+              [class.is-invalid]="
+                isValidControl('contactnumber') || contactnumber != null
+              "
+              formControlName="contactnumber"
+              class="form-control"
+            />
+            <div class="invalid-feedback">
+              {{
+                contactnumber
+                  ? contactnumber
+                  : "Please enter a valid mobile number."
+              }}
+            </div>
+          </div>
+          <div class="col">
+            <input
+              type="text"
+              [class.is-invalid]="
+                isValidControl('alternatenumber') || alternatenumber != null
+              "
+              formControlName="alternatenumber"
+              class="form-control"
+            />
+            <div class="invalid-feedback">
+              {{
+                alternatenumber
+                  ? alternatenumber
+                  : "Please enter a valid mobile number."
+              }}
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Address</label>
+        <textarea
+          rows="3"
+          formControlName="address"
+          [class.is-invalid]="isValidControl('address')"
+          class="form-control"
+        ></textarea>
+        <div class="invalid-feedback">
+          Please enter Address.
+        </div>
+      </div>
+      <button
+        type="submit"
+        class="btn btn-success btn-block"
+        [disabled]="!myForm.valid"
+      >
+        {{ editMode ? "Edit Address" : "Add Address" }}
+      </button>
+    </form>
+  </div>
+  <div class="spinner-border text-primary" role="status" *ngIf="isLoading">
+    <span class="sr-only">Loading...</span>
+  </div>
+</div>

@@ -1,0 +1,30 @@
+<div class="container-fluid mb-2 p-1">
+  <div class="card">
+    <div class="card-header bg-dark">
+      <div class="float-left">
+        <button class="btn btn-link text-light" (click)="show = !show">
+          {{ address.name }}
+        </button>
+      </div>
+      <div class="float-right">
+        <button class="btn btn-warning" [routerLink]="['/edit', address.id]">
+          edit
+        </button>
+        <button class="btn btn-danger ml-1" (click)="onDelete()">delete</button>
+      </div>
+    </div>
+    <div class="collapse" [class.show]="show">
+      <div class="card-body">
+        <label>Email</label>
+        <p>{{ address.email }}</p>
+        <hr />
+        <label>Mobile numbers</label>
+        <p>{{ address.contactnumber }}</p>
+        <p>{{ address.alternatenumber }}</p>
+        <hr />
+        <label>Address</label>
+        <p>{{ address.address }}</p>
+      </div>
+    </div>
+  </div>
+</div>

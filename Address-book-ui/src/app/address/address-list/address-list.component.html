@@ -1,0 +1,7 @@
+<h3 class="text-center">List of Addresses</h3>
+<hr />
+<div class="row justify-content-center" *ngFor="let address of addressList">
+  <div class="col-12 col-sm-8 col-md-8">
+    <app-address-item [address]="address"></app-address-item>
+  </div>
+</div>
