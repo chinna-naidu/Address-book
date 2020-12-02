@@ -4,7 +4,8 @@
   "description": "a rest-api for address-book",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "nodemon app",
+    "test": "mocha"
   },
   "author": "kondayyanaidu.chikkam@gmail.com",
   "license": "ISC",
@@ -16,5 +17,11 @@
     "jsonwebtoken": "^8.5.1",
     "mysql2": "^2.1.0",
     "sequelize": "^6.1.0"
+  },
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "mocha": "^8.2.1",
+    "nodemon": "^2.0.6",
+    "sinon": "^9.2.1"
   }
 }
