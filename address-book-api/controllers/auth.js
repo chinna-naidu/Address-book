@@ -6,7 +6,7 @@ const secret = require("../util/secret");
 exports.login = (req, res, next) => {
   const email = req.body.email;
   const password = req.body.password;
-  User.findOne({
+  return User.findOne({
     where: {
       email: email,
     },
@@ -15,7 +15,8 @@ exports.login = (req, res, next) => {
       const error = new Error("enter a valid email address");
       error.field = "email";
       error.status = 406;
-      return next(error);
+      next(error);
+      return error;
     } else {
       return bcrypt
         .compare(password, user.password)
@@ -24,8 +25,7 @@ exports.login = (req, res, next) => {
             const error = new Error("password is incorrect");
             error.field = "password";
             error.status = 406;
-            return next(error);
-            next(err);
+            throw error;
           } else {
             const token = jwt.sign(
               {
@@ -41,9 +41,13 @@ exports.login = (req, res, next) => {
           }
         })
         .then((data) => {
-          return res.status(200).json(data);
+          res.status(200).json(data);
         })
-        .catch((err) => console.log(err));
+        .catch((err) => {
+          console.log(err);
+          next(err);
+          return err;
+        });
     }
   });
 };

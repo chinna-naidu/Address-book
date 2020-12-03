@@ -16,7 +16,7 @@ module.exports = (req, res, next) => {
   if (!decodedToken || !decodedToken.userid) {
     throw new Error("not Authenticated");
   }
-//   console.log(decodedToken);
+  //   console.log(decodedToken);
   User.findByPk(decodedToken.userid)
     .then((user) => {
       req.user = user;

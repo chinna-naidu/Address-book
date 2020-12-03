@@ -24,7 +24,7 @@ describe("Tests for the isAuth Middlewear", function () {
     expect(isAuth.bind(this, req, {}, () => {})).to.throw("jwt malformed");
   });
 
-  it("should create a user object on request Object", function () {
+  it("should create a user object on request Object", function (done) {
     const req = {
       get: function () {
         return "xyz sdsadadadas";
@@ -40,10 +40,16 @@ describe("Tests for the isAuth Middlewear", function () {
       name: "test",
     });
     isAuth(req, {}, () => {
-      expect(req).to.have.property("user");
-      //   console.log(req);
-      stubbedVerify.restore();
-      stubbedFindByPk.restore();
+      try {
+        expect(req).to.have.property("user");
+        stubbedVerify.restore();
+        stubbedFindByPk.restore();
+        done();
+      } catch (err) {
+        stubbedVerify.restore();
+        stubbedFindByPk.restore();
+        done(err);
+      }
     });
   });
 });
