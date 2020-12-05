@@ -42,6 +42,7 @@ exports.login = (req, res, next) => {
         })
         .then((data) => {
           res.status(200).json(data);
+          return data;
         })
         .catch((err) => {
           console.log(err);
@@ -56,7 +57,7 @@ exports.signup = (req, res, next) => {
   const name = req.body.name;
   const email = req.body.email;
   const password = req.body.password;
-  User.findOne({
+  return User.findOne({
     where: {
       email: email,
     },
@@ -65,7 +66,8 @@ exports.signup = (req, res, next) => {
       const error = new Error("email already exists.");
       error.field = "email";
       error.status = 406;
-      return next(error);
+      next(error);
+      return error;
     }
     bcrypt
       .hash(password, 12)
