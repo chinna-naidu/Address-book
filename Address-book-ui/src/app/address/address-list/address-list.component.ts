@@ -15,9 +15,8 @@ export class AddressListComponent implements OnInit, OnDestroy {
   subscriptionList: Subscription;
   subscriptionChange: Subscription;
   constructor(
-    private route: ActivatedRoute,
     private addressService: AddressService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.subscriptionList = this.addressService
