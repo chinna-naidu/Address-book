@@ -1,5 +1,6 @@
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ReactiveFormsModule } from '@angular/forms';
 import { RouterTestingModule } from '@angular/router/testing';
 
 import { EditAddressComponent } from './edit-address.component';
@@ -11,7 +12,7 @@ describe('EditAddressComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [EditAddressComponent],
-      imports: [HttpClientTestingModule, RouterTestingModule],
+      imports: [HttpClientTestingModule, RouterTestingModule, ReactiveFormsModule],
     })
       .compileComponents();
   }));
